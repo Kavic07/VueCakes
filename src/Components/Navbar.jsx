@@ -10,7 +10,7 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 
 // eslint-disable-next-line react/prop-types
-const Navbar = ({ className, searchQuery, setSearchQuery, cartCount }) => {
+const Navbar = ({ className }) => {
   const [isNavbarVisibility, setIsNavbarVisibility] = useState(false);
   const toggleMenu = () => {
     setIsNavbarVisibility(!isNavbarVisibility);
@@ -42,11 +42,11 @@ const Navbar = ({ className, searchQuery, setSearchQuery, cartCount }) => {
 
         {/* Mobile View */}
         <div
-          className={`fixed top-16 left-52 w-36 bg-white p-4 rounded-bl-2xl md:hidden transition-transform transform shadow-lg ${
+          className={`fixed top-16 left-52 w-36 bg-lightPink p-4 rounded-bl-2xl md:hidden transition-transform transform ${
             isNavbarVisibility ? "scale-y-100" : "scale-y-0"
           } origin-top shadow-lg`}
         >
-          <ul className="space-y-2 font-nunito text-md text-gray-500">
+          <ul className="space-y-5 font-nunito font-bold text-md text-black md:text-gray-500">
             <li className="hover:text-customPink">
               <span className="pr-1 text-2xl">
                 <HomeOutlinedIcon />
@@ -138,8 +138,6 @@ const Navbar = ({ className, searchQuery, setSearchQuery, cartCount }) => {
                 type="text"
                 placeholder="Search for cakes"
                 className="ml-2 w-20 bg-transparent focus:outline-none placeholder-gray-400"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)} // Update searchQuery state
                 onClick={handleInputClick}
               />
             )}
@@ -173,8 +171,6 @@ const Navbar = ({ className, searchQuery, setSearchQuery, cartCount }) => {
               type="text"
               placeholder="Search for cakes"
               className="ml-2 w-36 bg-transparent focus:outline-none placeholder-gray-400"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)} // Update searchQuery state for desktop
             />
           </div>
 
@@ -182,14 +178,7 @@ const Navbar = ({ className, searchQuery, setSearchQuery, cartCount }) => {
             <FavoriteBorderIcon />
           </span>
           <PersonOutlineOutlinedIcon />
-          <div className="relative">
-            <ShoppingCartOutlinedIcon />
-            {cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
-                {cartCount}
-              </span>
-            )}
-          </div>
+          <ShoppingCartOutlinedIcon />
         </div>
       </div>
     </>
