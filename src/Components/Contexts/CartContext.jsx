@@ -14,10 +14,19 @@ export const CartProvider = ({ children }) => {
     setCartItems((prevItems) => [...prevItems, product]);
   };
 
-  // Function to remove roduct-items from the cart
+  // Function to remove product-items from the cart
   const removeFromCart = (productId) => {
-    setCartItems((prevItems) =>
-      prevItems.filter((item) => item.id !== productId)
+    setCartItems(
+      (prevItems) => {
+        const index = prevItems.findIndex((item) => item.id === productId);
+        if (index !== -1) {
+          const updatedItems = [...prevItems];
+          updatedItems.splice(index, 1);
+          return updatedItems;
+        }
+        return prevItems;
+      }
+      // prevItems.filter((item) => item.id !== productId)
     );
   };
 

@@ -1,15 +1,19 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Navbar from "../Components/Navbar";
 import ProductCard from "../Components/ProductCard";
+import { CartContext } from "../Components/Contexts/CartContext";
+import Footer from "../Components/Footer";
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState(""); // New state for search query
-  const [cartItems, setCartItems] = useState([]);
+  // const [cartItems, setCartItems] = useState([]);
+  const { addToCart, cartItems } = useContext(CartContext);
 
   // Function to handle adding product to the cart
   const handleAddToCart = (product) => {
-    setCartItems((prevCartItems) => [...prevCartItems, product]);
+    // setCartItems((prevCartItems) => [...prevCartItems, product]);
+    addToCart(product);
   };
 
   const Products = [
@@ -353,7 +357,7 @@ const Home = () => {
         searchQuery={searchQuery} // Pass searchQuery state as a prop to the Navbar
         setSearchQuery={setSearchQuery} // Pass setSearchQuery function as a prop to the Navbar
         cartCount={cartItems.length} // Pass cart count
-        className="fixed top-0 left-0 w-full z-50 bg-white shadow-lg"
+        className="fixed top-0 left-0 w-full z-50 bg-lightPink shadow-lg "
       />
 
       <div className="hero-section fixed top-[60px] md:top-[65px] left-0 w-full z-40">
@@ -364,7 +368,7 @@ const Home = () => {
         />
       </div>
 
-      <div className="flex flex-col md:flex-row mx-5 md:mb-9 pt-[180px] md:pt-[500px]">
+      <div className="flex flex-col md:flex-row mx-5 md:mb-9 pt-[180px] md:pt-[400px]">
         {/* Mobile view only */}
         <div className="relative inline-block text-left pb-8 md:hidden">
           <div className="flex justify-between font-nunito">
@@ -570,6 +574,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
