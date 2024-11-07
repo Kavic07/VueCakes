@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
@@ -29,31 +30,26 @@ const Navbar = ({ className, searchQuery, setSearchQuery, cartCount }) => {
   return (
     <>
       <div
-        className={`h-16 md:h-20 nav flex justify-between items-center px-10 md:px-20 ${className}`}
+        className={`bg-lightPink h-16 md:h-16 nav flex justify-between items-center px-10 md:px-20 ${className}`}
       >
         <h2 className="font-nunito font-extrabold text-customPink text-2xl">
           VUECAKES
         </h2>
 
-        {/* Hamburger Menu Button */}
-        <button className="md:hidden text-gray-900" onClick={toggleMenu}>
-          {isNavbarVisibility ? <MenuOpenIcon /> : <MenuOutlinedIcon />}
-        </button>
-
         {/* Mobile View */}
         <div
-          className={`fixed top-16 left-52 w-36 bg-white p-4 rounded-bl-2xl md:hidden transition-transform transform shadow-lg ${
+          className={`fixed top-16 left-64 w-28 bg-white p-2 rounded-bl-2xl md:hidden transition-transform transform shadow-lg ${
             isNavbarVisibility ? "scale-y-100" : "scale-y-0"
           } origin-top shadow-lg`}
         >
-          <ul className="space-y-2 font-nunito text-md text-gray-500">
+          <ul className="space-y-2 font-nunito text-sm text-gray-500">
             <li className="hover:text-customPink">
-              <span className="pr-1 text-2xl">
+              <span className="pr-1 text-sm">
                 <HomeOutlinedIcon />
               </span>
               <a
                 href="/"
-                className="md:block hover:text-customPink"
+                className="hover:text-customPink cursor-pointer md:block"
                 onClick={toggleMenu}
               >
                 Home
@@ -61,16 +57,23 @@ const Navbar = ({ className, searchQuery, setSearchQuery, cartCount }) => {
             </li>
 
             <li className="hover:text-customPink">
-              <span className="pr-1 text-2xl">
+              <span className="pr-1 text-sm">
                 <ShoppingBagOutlinedIcon />
               </span>
-              <a href="/shop">Shop</a>
+              <a href="/shop" className="hover:text-customPink cursor-pointer">
+                Shop
+              </a>
             </li>
             <li className="hover:text-customPink">
-              <span className="pr-1 text-2xl">
+              <span className="pr-1 text-sm">
                 <LocalPhoneOutlinedIcon />
               </span>
-              <a href="/contact">Contact</a>
+              <a
+                href="/contact"
+                className="hover:text-customPink cursor-pointer"
+              >
+                Contact
+              </a>
             </li>
           </ul>
         </div>
@@ -183,13 +186,20 @@ const Navbar = ({ className, searchQuery, setSearchQuery, cartCount }) => {
           </span>
           <PersonOutlineOutlinedIcon />
           <div className="relative">
-            <ShoppingCartOutlinedIcon />
-            {cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
-                {cartCount}
-              </span>
-            )}
+            <Link to="/cart">
+              <ShoppingCartOutlinedIcon />
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
           </div>
+
+          {/* Hamburger Menu Button */}
+          <button className="md:hidden text-gray-900" onClick={toggleMenu}>
+            {isNavbarVisibility ? <MenuOpenIcon /> : <MenuOutlinedIcon />}
+          </button>
         </div>
       </div>
     </>

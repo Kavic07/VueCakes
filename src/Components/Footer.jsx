@@ -7,7 +7,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 const Footer = () => {
   return (
     <>
-      <div className="bg-lightPink flex flex-col pl-4 py-7 md:flex-row justify-between md:px-32 md:pb-32">
+      <div className="bg-lightPink flex flex-col pl-4 py-7 md:flex-row justify-between md:px-32 md:pb-14">
         <div className="md:flex flex-col justify-center">
           <h2 className="font-nunito font-extrabold text-customPink text-3xl pb-4">
             VUECAKES
