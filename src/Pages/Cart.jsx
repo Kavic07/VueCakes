@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import { CartContext } from "../Components/Contexts/CartContext";
@@ -20,9 +21,18 @@ const Cart = () => {
           Cart
         </h2>
         {cartItems.length === 0 ? (
-          <p className=" flex justify-center items-center text-customPink font-extrabold text-xl bg-lightPink w-96 h-56 rounded-lg mb-20 mx-auto text-center">
-            Your Cart Is Empty...<br></br>Buy Some Cakes From Us Today
-          </p>
+          <>
+            <p className=" flex justify-center items-center text-customPink font-extrabold text-xl bg-lightPink w-72 h-56 rounded-lg mb-20 mx-auto text-center md:w-96">
+              Your Cart Is Empty...<br></br>Buy Some Cakes From Us Today
+            </p>
+            <div>
+              <Link to="/">
+                <button className="bg-customPink text-white font-bold text-sm outline-none px-4 py-2 rounded-lg hover:bg-lightPink">
+                  Back to home
+                </button>
+              </Link>
+            </div>
+          </>
         ) : (
           <>
             <div className="grid grid-cols-1 gap-4">
@@ -57,9 +67,11 @@ const Cart = () => {
               >
                 Clear Cart
               </button>
-              <button className="bg-customPink text-white px-4 py-4 rounded">
-                Checkout
-              </button>
+              <Link to="/checkout">
+                <button className="bg-customPink text-white px-4 py-2 rounded">
+                  Checkout
+                </button>
+              </Link>
             </div>
           </>
         )}

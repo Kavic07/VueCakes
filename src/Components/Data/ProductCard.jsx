@@ -23,20 +23,16 @@ const ProductCard = ({ image, title, price, onAddToCart }) => {
         <p className="font-semibold text-xl md:text-lg py-1.5 md:pb-2">
           {price}
         </p>
-        <div className="flex justify-between items-center md:max-w-64">
-          <button
-            className="bg-customPink text-white text-md  font-semibold px-28 py-3 md:px-14 rounded-lg"
-            onClick={onAddToCart}
-          >
-            Buy Now
-          </button>
-          <span
-            className="border border-customPink text-customPink rounded-lg px-3 py-2.5"
-            onClick={onAddToCart}
-          >
+
+        <button
+          className="flex items-center gap-5 bg-customPink text-white text-md  font-semibold px-28 py-3 md:px-9 rounded-lg hover:bg-lightPink"
+          onClick={onAddToCart}
+        >
+          Add to Cart{" "}
+          <span>
             <ShoppingCartOutlinedIcon />
           </span>
-        </div>
+        </button>
       </div>
     </>
   );

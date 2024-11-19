@@ -11,7 +11,22 @@ export default {
         lightPink: "#efcddc",
         lightGrey: "#E8E8E8",
       },
+      scrollbarWidth: {
+        none: "none",
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        ".scrollbar-none": {
+          "scrollbar-width": "none",
+          "-ms-overflow-style": "none",
+        },
+        ".scrollbar-none::-webkit-scrollbar": {
+          display: "none",
+        },
+      });
+    },
+  ],
 };

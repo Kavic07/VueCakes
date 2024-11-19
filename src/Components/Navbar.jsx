@@ -64,6 +64,7 @@ const Navbar = ({ className, searchQuery, setSearchQuery, cartCount }) => {
                 Shop
               </a>
             </li>
+
             <li className="hover:text-customPink">
               <span className="pr-1 text-sm">
                 <LocalPhoneOutlinedIcon />
@@ -73,6 +74,15 @@ const Navbar = ({ className, searchQuery, setSearchQuery, cartCount }) => {
                 className="hover:text-customPink cursor-pointer"
               >
                 Contact
+              </a>
+            </li>
+
+            <li className="hover:text-customPink">
+              <span className="pr-1 text-sm">
+                <PersonOutlineOutlinedIcon />
+              </span>
+              <a href="#" className="hover:text-customPink cursor-pointer">
+                Profile
               </a>
             </li>
           </ul>
@@ -184,7 +194,9 @@ const Navbar = ({ className, searchQuery, setSearchQuery, cartCount }) => {
           <span className="hidden md:block">
             <FavoriteBorderIcon />
           </span>
-          <PersonOutlineOutlinedIcon />
+          <span className="hidden md:block">
+            <PersonOutlineOutlinedIcon />
+          </span>
           <div className="relative">
             <Link to="/cart">
               <ShoppingCartOutlinedIcon />

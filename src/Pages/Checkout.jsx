@@ -1,11 +1,17 @@
 // eslint-disable-next-line no-unused-vars
-import { React, useState } from "react";
+import { React, useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
+import { CartContext } from "../Components/Contexts/CartContext";
 
 const Checkout = () => {
+  const { cartItems, clearCart } = useContext(CartContext);
   const [deliveryDate, setDeliveryDate] = useState(null);
   const [deliveryTime, setDeliveryTime] = useState("");
+  const deliveryFee = 5000;
+  const subtotal = cartItems.reduce((sum, item) => sum + item.price, 0);
+  const total = subtotal + deliveryFee;
 
   return (
     <>
@@ -15,7 +21,7 @@ const Checkout = () => {
           Checkout
         </h2>
 
-        <div className="flex flex-col mx-8 gap-6 md:flex-row md:justify-center md:gap-20 md:mx-16">
+        <div className="flex flex-col mx-8 gap-6 md:flex-row md:justify-between md:mx-32">
           <div>
             <div>
               <h3 className="font-nunito font-bold text-customPink text-xl pb-5">
@@ -27,7 +33,7 @@ const Checkout = () => {
                   Delivery or Pickup
                 </label>
                 <br></br>
-                <select className="mt-1 px-2 border py-2 border-gray-500 rounded-lg w-72">
+                <select className="mt-1 px-2 border py-2 border-gray-500 rounded-lg w-72 md:w-96">
                   <option>Quick Delivery</option>
                   <option>Pick up</option>
                 </select>
@@ -40,7 +46,7 @@ const Checkout = () => {
                 <input
                   type="date"
                   id="deliveryDate"
-                  value={deliveryDate}
+                  value={deliveryDate || ""}
                   onChange={(e) => setDeliveryDate(e.target.value)}
                   className="mt-1 block px-3 border py-2 border-gray-500 rounded-lg w-72 md:w-96"
                 />
@@ -53,9 +59,9 @@ const Checkout = () => {
                 <input
                   type="time"
                   id="deliveryTime"
-                  value={deliveryTime}
+                  value={deliveryTime || ""}
                   onChange={(e) => setDeliveryTime(e.target.value)}
-                  className="mt-1 block px-3 border py-2 border-gray-500 rounded-lg w-72"
+                  className="mt-1 block px-3 border py-2 border-gray-500 rounded-lg w-72 md:w-96"
                 />
               </div>
             </div>
@@ -73,7 +79,7 @@ const Checkout = () => {
                   type="text"
                   id="name"
                   placeholder="Enter your name here"
-                  className="mt-1 block px-3 border py-2 border-gray-500 rounded-lg w-72"
+                  className="mt-1 block px-3 border py-2 border-gray-500 rounded-lg w-72 md:w-96"
                 />
               </div>
 
@@ -85,7 +91,7 @@ const Checkout = () => {
                   type="email"
                   id="email"
                   placeholder="Enter E-mail address here"
-                  className="mt-1 block px-3 border py-2 border-gray-500 rounded-lg w-72"
+                  className="mt-1 block px-3 border py-2 border-gray-500 rounded-lg w-72 md:w-96"
                 />
               </div>
 
@@ -100,7 +106,7 @@ const Checkout = () => {
                   type="text"
                   id="address"
                   placeholder="Enter your address here"
-                  className="mt-1 block px-3 border py-2 border-gray-500 rounded-lg w-72"
+                  className="mt-1 block px-3 border py-2 border-gray-500 rounded-lg w-7 md:w-96"
                 />
               </div>
 
@@ -115,7 +121,7 @@ const Checkout = () => {
                   type="text"
                   id="address"
                   placeholder="Enter your address here"
-                  className="mt-1 block px-3 border py-2 border-gray-500 rounded-lg w-72"
+                  className="mt-1 block px-3 border py-2 border-gray-500 rounded-lg w-72 md:w-96"
                 />
               </div>
 
@@ -127,13 +133,13 @@ const Checkout = () => {
                   type="text"
                   id="notes"
                   placeholder="Enter your notes here"
-                  className="mt-1 block px-3 border py-2 border-gray-500 rounded-lg w-72"
+                  className="mt-1 block px-3 border py-2 border-gray-500 rounded-lg w-72 md:w-96"
                 />
               </div>
             </div>
           </div>
 
-          <div className="mb-8 px-4 py-4 border border-customPink rounded-xl">
+          <div className="mb-8 px-4 py-4 border border-customPink rounded-xl md:w-[450px] md:h-80 overflow-y-auto scrollbar-none">
             <h3 className="font-nunito font-bold text-customPink text-xl pb-4">
               Your Order
             </h3>
@@ -143,30 +149,42 @@ const Checkout = () => {
               <h4>Amount</h4>
             </div>
 
-            <div className="flex justify-between pb-3 font-nunito">
-              <p>Red velvet single layer cake</p>
-              <p>N 30,000</p>
-            </div>
+            {cartItems.map((item) => (
+              <>
+                <div
+                  key={item.id}
+                  className="flex justify-between pb-3 font-nunito font-semibold"
+                >
+                  <p>{item.title}</p>
+                  <p>{item.price.toLocaleString()}</p>
+                </div>
+              </>
+            ))}
 
-            <div className="flex justify-between pb-3 font-nunito">
+            <div className="flex justify-between pb-3 font-nunito font-semibold">
               <p>Subtotal</p>
-              <p>N 30,000</p>
+              <p>N {subtotal.toLocaleString()}</p>
             </div>
 
-            <div className="flex justify-between pb-3 font-nunito">
+            <div className="flex justify-between pb-3 font-nunito font-semibold">
               <p>Delivery</p>
-              <p>Quick Delivery: N5,000</p>
+              <p>Quick Delivery: N{deliveryFee.toLocaleString()}</p>
             </div>
 
-            <div className="flex justify-between font-nunito">
+            <div className="flex justify-between font-nunito font-semibold">
               <p>Total</p>
-              <p>N 35,000</p>
+              <p>N {total.toLocaleString()}</p>
             </div>
-
-            <button className="mx-auto my-4 bg-customPink rounded-lg text-white text-center text-sm px-24 py-3 flex justify-center">
-              Order Now
-            </button>
           </div>
+        </div>
+
+        <div>
+          <button
+            className="mx-auto my-4 bg-customPink rounded-lg text-white text-center text-sm px-24 py-3 flex justify-center"
+            onClick={clearCart}
+          >
+            <Link to="/modal">Order Now</Link>
+          </button>
         </div>
       </div>
       <Footer />
